@@ -15,10 +15,27 @@ function getList() {
   });
 }
 
+
 // TODO: Handle the resolved or rejected states of the promise
+let errorId = document.querySelector("#error");
+let listId = document.querySelector("#list");
 
-// TODO: If the promise resolves with the list of hobbits
-// Render the list of hobbits as list items within the unordered list with id="list" (check the index.html file)
+let promise = getList();
 
-// TODO: If the promise rejects with the failure object
-// Display the failure message in the paragraph element with id="error" (check index.html file)
+function workWithList(list) {
+  list.forEach((hobbit) => {
+    let li = document.createElement("li");
+    li.textContent = hobbit;
+    listId.appendChild(li);
+  });
+
+}
+
+function workWithError(reject) {
+  console.log(reject);
+  errorId.textContent = reject.message;
+}
+
+
+promise.then(workWithList).catch(workWithError);
+
